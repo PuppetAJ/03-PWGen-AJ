@@ -18,10 +18,29 @@ generateBtn.addEventListener("click", writePassword);
 
 
 
-var generatePassword = function(selections) {
+var generatePassword = function() {
+  var chars = '01234567890abcdefghijklmnopqrstuvwxyz!@#$%^&*()_-+=,.:;<>?][{}~`abcdefghijklmnopqrstuvwxyz';
+  var pwordLength = 8;
+  var password = '';
+
+  var array = new Uint32Array(pwordLength);
+  window.crypto.getRandomValues(array);
+  console.log(array);
+
+  for (var i = 0; i < pwordLength; i++) {
+    // we do this due to the fact that the numbers in the UInt32Array are large, and would exceed the length of the 
+    // initial character array's length. remainders cannot be larger than the divisor, and as such, we use the char variable's
+    // length as said divisor, divided by the random numbers produced by our UInt32Array to produce a random number that never exceeds
+    // the length of the characters it has to select from. Along with this, it always produces a whole number.
+    password += chars[array[i] % chars.length]
+  }
+
+  console.log("Password is " + password);
 
 
 }
+
+generatePassword();
 
 var btnAlerts = function() {
 
@@ -62,21 +81,6 @@ var btnAlerts = function() {
   };
 
 };
-
-btnAlerts();
-
-// number = length of the array (?)
-// number of elements within array
-
-//changing the type of array (8 - 64 bit) changes the content of the array in bytes i believe.
-//this in turn forces a change in number length
-// var array = new Uint8Array(1);
-// window.crypto.getRandomValues(array);
-
-// console.log("Your lucky numbers:");
-// for (const num of array) {
-//   console.log(num.toString(36));
-// }
 
 //https://stackoverflow.com/questions/68617403/how-to-properly-generate-a-random-password-with-the-window-crypto-property
 
