@@ -11,9 +11,10 @@ To complete this project I began by attempting to figure out a way to generate a
 * JavaScript
 
 ## Preview
-![Preview](path)
+![Preview](./assets/images/preview.jpg)
 
 ## Website
+https://puppetaj.github.io/03-PWGen-AJ/
 
 ## Credits
 Made by Adrian Jimenez
