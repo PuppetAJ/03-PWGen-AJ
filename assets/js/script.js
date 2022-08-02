@@ -100,14 +100,19 @@ var generatePassword = function(selections) {
     Opted to use window.crypto to generate psuedo-random numbers as Math.random is not 
     cryptographically secure.
   ---------------------
-  What this does is declare an array of unsigned 32-bit integers the length of the selectedChars array.
+  What this does is declare an array of unsigned 32-bit integers the length the user wanted for their password. 
+  
+  This is done to ensure that if the user asks for a password above the size of the selectedCharacters list, then it is still
+  able to grab a random number from said index (due to the fact that the later for loop uses the password length 
+  as the index of the random number to grab)
+
   Then, it assigns random 32-bit values to each index in the array.
 
   */
 
   // the new Uint32Array() is a constructor method.
 
-  var rngArray = new Uint32Array(selectedChars.length);
+  var rngArray = new Uint32Array(passwordLength);
   window.crypto.getRandomValues(rngArray);
 
   /* A for loop which iterates through random character selection using the previous 32-bit array's values
@@ -150,7 +155,7 @@ var btnAlerts = function() {
   var characterConfirm = function() {
     
     // variables all set to a boolean value depending on whether the user confirms they want said characters in their password.
-    window.alert("WARNING: The following selected characters will be randomly added to a pool of characters to generate your password from. There is no guarantee your password will contain said characters with shorter lengths!");
+    window.alert("WARNING: The following selected characters will be randomly added to a pool of characters to generate your password from. There is no guarantee your password will contain ALL said characters with shorter lengths!");
     var numericConfirm = window.confirm("Would you like numeric characters to be chosen from?");
     var specialCharactersConfirm = window.confirm("Would you like special characters to be chosen from?");
     var uppercaseConfirm = window.confirm("Would you like uppercase characters to be chosen from?");
@@ -158,7 +163,7 @@ var btnAlerts = function() {
     // response validation to ensure that the user selects AT LEAST one extra set of characters
 
     if (!numericConfirm && !specialCharactersConfirm && !uppercaseConfirm) {
-      window.alert("one extra character type must be selected!");
+      window.alert("One extra character type must be selected!");
 
       // restarts function
       return characterConfirm();
