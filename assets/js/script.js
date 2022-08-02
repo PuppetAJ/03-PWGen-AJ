@@ -20,35 +20,38 @@ var generatePassword = function(selections) {
 
   // Characters which are able to be used in generation are declared seperately for selection.
 
+  // numbers are repeated twice to ensure less bias between letters and numbers (less numbers means less chance to select them) 
   var numbers = '01234567890123456789';
   var uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var specialCharacters = '!@#$%^&*()_-+=,.:;<>?][{}~`';
+  var lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
  
   /* Variable representing the length of the password to be generated is set to the 
   user input gathered in the btnAlerts() function. */
 
   var passwordLength = selections.passwordLength;
 
-  /* By default, no matter what the user selects the pool of potential characters to generate from
-  must be at least these lowercase letters */
-
-  var selectedChars = 'abcdefghijklmnopqrstuvwxyz';
+  var selectedChars = '';
 
   /* Taking the selections from the btnAlerts() function, simple logic adds onto the
   selectedChars string depending on which characters the user wants in their password */
 
   if (selections.numbers) {
     selectedChars = selectedChars + numbers;
-  } 
+  };
   
   if (selections.specialCharacters) {
     selectedChars = selectedChars + specialCharacters;
-  }
+  };
   
   if (selections.upperCase) {
-    selectedChars = selectedChars + uppercaseLetters
+    selectedChars = selectedChars + uppercaseLetters;
   };
 
+  if (selections.lowerCase) {
+    selectedChars = selectedChars + lowercaseLetters;
+  };
+  
   /* In order to help prevent bias in the password generation, the pool of potential characters 
   to select from is shuffled. This is done using a modified version of the Fisher-Yates shuffle algorithm 
 
@@ -159,11 +162,11 @@ var btnAlerts = function() {
     var numericConfirm = window.confirm("Would you like numeric characters to be chosen from?");
     var specialCharactersConfirm = window.confirm("Would you like special characters to be chosen from?");
     var uppercaseConfirm = window.confirm("Would you like uppercase characters to be chosen from?");
-
+    var lowercaseConfirm = window.confirm("Would you like lowercase characters to be chosen from?");
     // response validation to ensure that the user selects AT LEAST one extra set of characters
 
-    if (!numericConfirm && !specialCharactersConfirm && !uppercaseConfirm) {
-      window.alert("One extra character type must be selected!");
+    if (!numericConfirm && !specialCharactersConfirm && !uppercaseConfirm && !lowercaseConfirm) {
+      window.alert("One character type must be selected!");
 
       // restarts function
       return characterConfirm();
@@ -176,7 +179,8 @@ var btnAlerts = function() {
         passwordLength: lengthResponse,
         numbers: numericConfirm,
         specialCharacters: specialCharactersConfirm,
-        upperCase: uppercaseConfirm
+        upperCase: uppercaseConfirm,
+        lowerCase: lowercaseConfirm
       }
 
       // sends object with all user's values to the function
