@@ -58,7 +58,7 @@ var generatePassword = function(selections) {
 
   selectedChars = characterShuffle(selectedChars);
 
-  var rngArray = new Uint32Array(selectedChars.length);
+  var rngArray = new Uint32Array(passwordLength);
   window.crypto.getRandomValues(rngArray);
 
   for (var i = 0; i < passwordLength; i++) {
