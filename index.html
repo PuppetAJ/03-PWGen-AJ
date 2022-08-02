@@ -8,17 +8,20 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
+
+    <!-- Wrapper div for the header of the page (for styling )-->
     <div class="wrapper">
-      
       <header>
         <h1>Password Generator</h1>
       </header>
 
+    <!-- Card div for styling -->
       <div class="card">
         <div class="card-header">
           <h2>Generate a Password</h2>
         </div>
 
+        <!-- Body of card, where the password will be displayed -->
         <div class="card-body">
           <textarea
             readonly
@@ -28,11 +31,13 @@
           ></textarea>
         </div>
 
+        <!-- Footer of the card containing the generate button, with id's to be referenced in other files -->
         <div class="card-footer">
           <button id="generate" class="btn">Generate Password</button>
         </div>
 
       </div>
+    <!-- Card div ends -->
     </div>
     <script src="./assets/js/script.js"></script>
   </body>
