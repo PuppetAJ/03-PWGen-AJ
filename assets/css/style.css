@@ -1,9 +1,12 @@
+/* Universal styling */
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+/* General styles */
 html,
 body,
 .wrapper {
@@ -16,6 +19,8 @@ body {
   font-family: sans-serif;
   background-color: #f9fbfd;
 }
+
+/* Class styles start */
 
 .wrapper {
   padding-top: 30px;
@@ -118,6 +123,10 @@ button[disabled] {
   overflow: hidden;
 }
 
+/* Card styles end */
+
+/* Media queries start */
+
 @media (max-width: 690px) {
   .btn {
     font-size: 1rem;
@@ -135,3 +144,5 @@ button[disabled] {
     font-size: 0.8rem;
   }
 }
+
+/* Media queries end */
